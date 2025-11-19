@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CV AutoFill</title>
+  <style>
+    body {
+      width: 400px;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #container {
+      padding: 15px;
+    }
+    h1 {
+      font-size: 18px;
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+    .section {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 13px;
+      color: #555;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 13px;
+    }
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 12px;
+      resize: vertical;
+      min-height: 80px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    #status {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 13px;
+      border-radius: 4px;
+      display: none;
+    }
+    #status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+    }
+    #status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+    }
+    #status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+      display: block;
+    }
+    .cv-info {
+      font-size: 12px;
+      color: #666;
+      padding: 8px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .options-toggle {
+      background: #2196F3;
+      margin-bottom: 10px;
+    }
+    .options-toggle:hover {
+      background: #0b7dda;
+    }
+    #advancedOptions {
+      display: none;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    #advancedOptions.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>🎯 CV AutoFill</h1>
+    
+    <div class="section">
+      <label for="cvFile">Wczytaj CV (JSON):</label>
+      <input type="file" id="cvFile" accept=".json">
+      <div id="cvInfo" class="cv-info" style="display: none;">
+        CV załadowane: <span id="cvName"></span>
+      </div>
+    </div>
+    
+    <button id="toggleOptions" class="options-toggle">⚙️ Opcje dodatkowe</button>
+    
+    <div id="advancedOptions">
+      <div class="section">
+        <label for="employmentType">Forma zatrudnienia:</label>
+        <select id="employmentType">
+          <option value="B2B">B2B</option>
+          <option value="UoP">Umowa o pracę</option>
+          <option value="UZ">Umowa zlecenie</option>
+        </select>
+      </div>
+      
+      <div class="section">
+        <label for="expectedSalary">Oczekiwane wynagrodzenie:</label>
+        <input type="number" id="expectedSalary" placeholder="np. 21000">
+      </div>
+      
+      <div class="section">
+        <label for="availabilityDate">Dostępność:</label>
+        <input type="text" id="availabilityDate" placeholder="np. Natychmiast, 1 miesiąc" value="Natychmiast">
+      </div>
+      
+      <div class="section">
+        <label for="coverLetter">List motywacyjny (opcjonalny):</label>
+        <textarea id="coverLetter" placeholder="Wpisz swój list motywacyjny..."></textarea>
+      </div>
+    </div>
+    
+    <button id="fillButton" disabled>Wypełnij formularz</button>
+    <button id="detectButton">Wykryj formularz</button>
+    
+    <div id="status"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
